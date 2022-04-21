@@ -51,6 +51,7 @@ class Follow(models.Model):
 
     def __str__(self):
         return self.user
+        return f'Follow(pk={self.pk}, author={self.user},{self.following})'
 
 
 class Comment(models.Model):
