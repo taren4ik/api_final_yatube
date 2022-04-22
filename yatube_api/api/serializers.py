@@ -30,8 +30,24 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
- #   user = serializers.SlugRelatedField(read_only=True,
- #                                      queryset=User.objects.all())
+    user = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username',
+        default=serializers.CurrentUserDefault()
+    )
+
+    following = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username'
+    )
+
+    def validate(self, attrs):
+        attrs(print)
+        if attrs['user'] == attrs['following']:
+            raise serializers.ValidationError(
+                'Запрещена подписка на себя.'
+            )
+        return attrs
 
     class Meta:
         fields = '__all__'
@@ -41,6 +57,8 @@ class FollowSerializer(serializers.ModelSerializer):
             serializers.UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
                 fields=['user', 'following'],
-                message='Вы подписаны на автора'
+                message='Уже есть подписка'
             )
         ]
+
+
