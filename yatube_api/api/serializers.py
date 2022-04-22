@@ -41,14 +41,6 @@ class FollowSerializer(serializers.ModelSerializer):
         slug_field='username'
     )
 
-    def validate(self, attrs):
-        attrs(print)
-        if attrs['user'] == attrs['following']:
-            raise serializers.ValidationError(
-                'Запрещена подписка на себя.'
-            )
-        return attrs
-
     class Meta:
         fields = '__all__'
         model = Follow
@@ -61,4 +53,10 @@ class FollowSerializer(serializers.ModelSerializer):
             )
         ]
 
+    def validate(self, attrs):
+        if attrs['user'] == attrs['following']:
+            raise serializers.ValidationError(
+                'Запрещена подписка на себя.'
+            )
+        return attrs
 
