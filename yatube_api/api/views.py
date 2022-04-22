@@ -53,14 +53,8 @@ class FollowViewSet(
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     search_fields = ('following__username',)
 
-    # def get_queryset(self):
-    #     name = self.kwargs.get('user')
-    #     user = get_object_or_404(User, username=name.username)
-    #     return user.follower.all()
-
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.request.user.username)
-        print(user)
+        user = get_object_or_404(User, username=self.request.user)
         return user.follower
 
     def perform_create(self, serializer):
