@@ -59,4 +59,3 @@ class FollowSerializer(serializers.ModelSerializer):
                 'Запрещена подписка на себя.'
             )
         return attrs
-
