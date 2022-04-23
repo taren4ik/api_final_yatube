@@ -1,16 +1,19 @@
 from rest_framework import filters
+from rest_framework import mixins
 from rest_framework import permissions
 from rest_framework import viewsets
-from rest_framework import mixins
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import get_object_or_404
 
-from posts.models import Post, Group, Comment, Follow, User
-from .serializers import PostSerializer
+from posts.models import Follow
+from posts.models import Group
+from posts.models import Post
+from posts.models import User
 from .serializers import CommentSerializer
-from .serializers import GroupSerializer
 from .serializers import FollowSerializer
+from .serializers import GroupSerializer
+from .serializers import PostSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
