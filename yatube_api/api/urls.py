@@ -1,10 +1,7 @@
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
-from api.views import CommentViewSet
-from api.views import GroupViewSet
-from api.views import PostViewSet
-from api.views import FollowViewSet
+from api.views import CommentViewSet, GroupViewSet, PostViewSet, FollowViewSet
 
 router = SimpleRouter()
 router.register('posts', PostViewSet)
